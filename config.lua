@@ -7,7 +7,7 @@ Config.BlipSprite = 1879260108
 
 Config.MoonshineShacks = {
 	{
-		label = "Bayou Nwa",
+		label = "Bayou Nwa moonshine shack",
 		imaps = {
 			`mp006_a3supp_moonshine01`,
 			`mp006_a3supp_moonshine01_plug`
@@ -26,7 +26,7 @@ Config.MoonshineShacks = {
 		exit = vector4(1786.137, -814.233, 192.596, 224.800)
 	},
 	{
-		label = "Grizzlies",
+		label = "Grizzlies moonshine shack",
 		imaps = {
 			`mp006_a2supp_moonshine02`,
 			`mp006_a2supp_moonshine02_plug`
@@ -45,7 +45,7 @@ Config.MoonshineShacks = {
 		exit = vector4(-1089.031, 707.869, 84.230, 24.023)
 	},
 	{
-		label = "New Austin",
+		label = "New Austin moonshine shack",
 		imaps = {
 			`mp006_a4supp_moonshine03`,
 			`mp006_a4supp_moonshine03_plug`
@@ -64,7 +64,7 @@ Config.MoonshineShacks = {
 		exit = vector4(-2776.510, -3050.269, -8.703, 334.542)
 	},
 	{
-		label = "Heartlands",
+		label = "Heartlands moonshine shack",
 		imaps = {
 			`mp006_a1supp_moonshine04`,
 			`mp006_a1supp_moonshine04_plug`
@@ -82,7 +82,7 @@ Config.MoonshineShacks = {
 		exit = vector4(1625.663, 829.746, 124.938, 249.668)
 	},
 	{
-		label = "Tall Trees",
+		label = "Tall Trees moonshine shack",
 		imaps = {
 			`mp006_a4supp_moonshine05`,
 			`mp006_a4supp_moonshine05_plug`

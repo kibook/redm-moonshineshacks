@@ -15,13 +15,13 @@ function ActivateMoonshineShack(shack)
 
 	if IsValidInterior(shack.interiorId) then
 		if IsInteriorEntitySetActive(shack.interiorId, shack.interiorEntitySets[1]) then
-			print(shack.label .. " moonshine shack interior is already active")
+			print(shack.label .. " interior is already active")
 		else
 			for _, set in ipairs(shack.interiorEntitySets) do
 				ActivateInteriorEntitySet(shack.interiorId, set)
 			end
 
-			print(shack.label .. " moonshine shack interior activated")
+			print(shack.label .. " interior activated")
 		end
 	end
 
@@ -40,10 +40,10 @@ function DeactivateMoonshineShack(shack)
 				DeactivateInteriorEntitySet(shack.interiorId, set, true)
 			end
 
-			print(shack.label .. " moonshine shack interior deactived")
+			print(shack.label .. " interior deactived")
 		else
 
-			print(shack.label .. " moonshine shack interior is not active")
+			print(shack.label .. " interior is not active")
 		end
 	end
 
@@ -86,7 +86,7 @@ CreateThread(function()
 
 			if distance < Config.TeleportDistance then
 				closestTeleport = {
-					label = "enter " .. shack.label .. " moonshine shack",
+					label = "enter " .. shack.label,
 					coords = shack.entrance,
 					destination = shack.exit
 				}
@@ -98,7 +98,7 @@ CreateThread(function()
 
 			if distance < Config.TeleportDistance then
 				closestTeleport = {
-					label = "exit " .. shack.label .. " moonshine shack",
+					label = "exit " .. shack.label,
 					coords = shack.exit,
 					destination = shack.entrance
 				}
