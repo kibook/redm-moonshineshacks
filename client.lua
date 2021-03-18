@@ -1,5 +1,12 @@
 local ClosestTeleport
 
+local PromptGroup = UipromptGroup:new("Moonshine Shack")
+local Prompt = PromptGroup:addPrompt(`INPUT_DYNAMIC_SCENARIO`, "Enter")
+Prompt:setHoldMode(true)
+Prompt:setOnHoldModeJustCompleted(function(prompt, destination)
+	SetEntityCoordsAndHeadingNoOffset(PlayerPedId(), ClosestTeleport.destination)
+end)
+
 function SetEntityCoordsAndHeadingNoOffset(entity, xPos, yPos, zPos, heading, p5, p6)
 	return Citizen.InvokeNative(0x0918E3565C20F03C, entity, xPos, yPos, zPos, heading, p5, p6)
 end
@@ -50,23 +57,11 @@ function DeactivateMoonshineShack(shack)
 	RemoveBlip(shack.blip)
 end
 
-function DrawText3D(text, x, y, z)
-	local onScreen, screenX, screenY = GetScreenCoordFromWorldCoord(x, y, z)
-
-	SetTextScale(0.35, 0.35)
-	SetTextFontForCurrentCommand(1)
-	SetTextColor(255, 255, 255, 223)
-	SetTextCentre(1)
-	DisplayText(CreateVarString(10, "LITERAL_STRING", text), screenX, screenY)
-end
-
 AddEventHandler('onResourceStop', function(resourceName)
-	if GetCurrentResourceName() ~= resourceName then
-		return
-	end
-
-	for _, shack in ipairs(Config.MoonshineShacks) do
-		DeactivateMoonshineShack(shack)
+	if GetCurrentResourceName() == resourceName then
+		for _, shack in ipairs(Config.MoonshineShacks) do
+			DeactivateMoonshineShack(shack)
+		end
 	end
 end)
 
@@ -86,8 +81,8 @@ CreateThread(function()
 
 			if distance < Config.TeleportDistance then
 				closestTeleport = {
-					label = "enter " .. shack.label,
-					coords = shack.entrance,
+					action = "Enter",
+					label = shack.label,
 					destination = shack.exit
 				}
 
@@ -98,8 +93,8 @@ CreateThread(function()
 
 			if distance < Config.TeleportDistance then
 				closestTeleport = {
-					label = "exit " .. shack.label,
-					coords = shack.exit,
+					action = "Exit",
+					label = shack.label,
 					destination = shack.entrance
 				}
 
@@ -116,11 +111,9 @@ end)
 CreateThread(function()
 	while true do
 		if ClosestTeleport then
-			DrawText3D("Press [E] to " .. ClosestTeleport.label, table.unpack(ClosestTeleport.coords))
-
-			if IsControlJustPressed(0, Config.TeleportControl) then
-				SetEntityCoordsAndHeadingNoOffset(PlayerPedId(), ClosestTeleport.destination)
-			end
+			PromptGroup:setText(ClosestTeleport.label)
+			Prompt:setText(ClosestTeleport.action)
+			PromptGroup:handleEvents(ClosestTeleport.destination)
 		end
 
 		Wait(0)
