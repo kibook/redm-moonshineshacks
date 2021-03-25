@@ -1,7 +1,7 @@
 local ClosestTeleport
 
 local PromptGroup = UipromptGroup:new("Moonshine Shack")
-local Prompt = PromptGroup:addPrompt(`INPUT_DYNAMIC_SCENARIO`, "Enter")
+local Prompt = Uiprompt:new(`INPUT_DYNAMIC_SCENARIO`, "Enter", PromptGroup)
 Prompt:setHoldMode(true)
 Prompt:setOnHoldModeJustCompleted(function(prompt, destination)
 	SetEntityCoordsAndHeadingNoOffset(PlayerPedId(), ClosestTeleport.destination)
